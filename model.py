@@ -1,4 +1,5 @@
 import pandas as pd
+import pickle
 
 metaData = pd.read_csv('./data/main_data.csv', engine='python');
 metaData = metaData.drop(columns = 'Unnamed: 0')
@@ -66,5 +67,9 @@ def give_rec(title, sig=cosine_sim2):
     return resList
 
 
+pickle.dump(give_rec, open('model.pkl','wb'))
 
-print(give_rec('Bollywood Brasserie'))
+# print(give_rec('Bollywood Brasserie'))
+
+model = pickle.load(open('model.pkl','rb'))
+print(model('Bollywood Brasserie'))
