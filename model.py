@@ -71,5 +71,6 @@ pickle.dump(give_rec, open('model.pkl','wb'))
 
 # print(give_rec('Bollywood Brasserie'))
 
-model = pickle.load(open('model.pkl','rb'))
-print(model('Bollywood Brasserie'))
+# model = pickle.load(open('model.pkl','rb'))
+# output = (model('Bollywood Brasserie'))
+# print(output[0])
