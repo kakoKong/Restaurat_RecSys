@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios'
@@ -34,26 +33,32 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>React + Flask Tutorial</p>
+        <h1>Restaurant Recommender System</h1>
+        {/* <p>React + Flask Tutorial</p> */}
         <div>{getMessage.status === 200 ? 
+        <>
           <h3>{getMessage.data.message}</h3>
+          <div>
+          <button onClick={()=>setName({...name, message: 'Bollywood Brasserie'})}>Enter Name</button>
+          <button onClick={()=>setName({...name, message: 'Bar 61 Restaurant'})}>Enter Name</button>
+          <button onClick={()=>setName({...name, message: 'The Five Fields'})}>Enter Name</button>
+          <button onClick={()=>setName({...name, message: 'The Golden Chippy'})}>Enter Name</button>
+          <div>
+            <ul>
+            {resList.map(res => (
+              
+              <li>{res}</li>)
+            
+            )}
+            </ul>
+          </div>
+        </div>
+        </>
+          
           :
           <h3>LOADING</h3>}</div>
       </header>
-      <div>
-        <button onClick={()=>setName({...name, message: 'Bollywood Brasserie'})}>Enter Name</button>
-        <button onClick={()=>setName({...name, message: 'Bar 61 Restaurant'})}>Enter Name</button>
-        <button onClick={()=>setName({...name, message: 'The Five Fields'})}>Enter Name</button>
-        <button onClick={()=>setName({...name, message: 'The Golden Chippy'})}>Enter Name</button>
-        <div>
-          {resList.map(res => (
-            
-            <h1>{res}</h1>)
-          
-          )}
-        </div>
-      </div>
+      
     </div>
   );
 }
