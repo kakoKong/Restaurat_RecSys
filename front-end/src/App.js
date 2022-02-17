@@ -5,22 +5,27 @@ import axios from 'axios'
 
 function App() {
   const [getMessage, setGetMessage] = useState({})
-  const [name, setName] = useState({type: 'str', message: 'Bollywood Brasserie'})
+  const [name, setName] = useState({type: 'str', message: ''})
 
+  const [resList, setResList] = useState([])
   useEffect(()=>{
     axios.get('http://127.0.0.1:5000//predict/').then(response => {
-      console.log("SUCCESS", response)
+      // console.log("SUCCESS", response)
       setGetMessage(response)
     }).catch(error => {
       console.log(error)
     })
+    console.log(name)
+    submitName(name)
+  }, [name])
 
-  }, [])
-
-  const submitName = (resName) => {
-    console.log('submit')
-    axios.post('http://127.0.0.1:5000//predict/', resName).then(res =>{
+  const submitName = async (resName) => {
+    
+    console.log(resName)
+    await axios.post('http://127.0.0.1:5000//predict/', resName).then(res =>{
       console.log(res)
+      console.log(typeof(res.data))
+      setResList(Object.values(res.data))
     }).catch(err =>
       console.log(err)
       )
@@ -37,7 +42,17 @@ function App() {
           <h3>LOADING</h3>}</div>
       </header>
       <div>
-        <button onClick={()=>submitName(name)}>Enter Name</button>
+        <button onClick={()=>setName({...name, message: 'Bollywood Brasserie'})}>Enter Name</button>
+        <button onClick={()=>setName({...name, message: 'Bar 61 Restaurant'})}>Enter Name</button>
+        <button onClick={()=>setName({...name, message: 'The Five Fields'})}>Enter Name</button>
+        <button onClick={()=>setName({...name, message: 'The Golden Chippy'})}>Enter Name</button>
+        <div>
+          {resList.map(res => (
+            
+            <h1>{res}</h1>)
+          
+          )}
+        </div>
       </div>
     </div>
   );
