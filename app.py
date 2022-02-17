@@ -1,5 +1,5 @@
 #import Flask
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from flask_restful import Api, Resource, reqparse
 from flask_cors import CORS #comment this on deployment
 import pickle
@@ -21,16 +21,36 @@ if __name__ == '__main__':
 def predict():
     
     if request.method == "POST":
+        parser = reqparse.RequestParser()
+        parser.add_argument('type', type=str)
+        parser.add_argument('message', type=str)
+
+        args = parser.parse_args()
+        print(args)
         
+        request_type = args['type']
+        request_json = args['message']
+        # ret_status, ret_msg = ReturnData(request_type, request_json)
+        # currently just returning the req straight
+        ret_status = request_type
+        ret_msg = request_json
         #get form data
+        
+        print(ret_msg)
         res_name= request.form.get('res_name')
         sepal_width = request.form.get('sepal_width')
         petal_length = request.form.get('petal_length')
         petal_width = request.form.get('petal_width')
         
         try:
-            output = restaurant_prediction(res_name)
-            return render_template('predict.html', prediction = output)
+            output = restaurant_prediction(ret_msg)
+            result = {}
+            i = 1
+            for value in output:
+                result[str(i)] = value
+                i += 1
+            print(result)
+            return jsonify(result)
         
         except ValueError:
             return 'invalid Value'

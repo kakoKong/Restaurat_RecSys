@@ -5,6 +5,7 @@ import axios from 'axios'
 
 function App() {
   const [getMessage, setGetMessage] = useState({})
+  const [name, setName] = useState({type: 'str', message: 'Bollywood Brasserie'})
 
   useEffect(()=>{
     axios.get('http://127.0.0.1:5000//predict/').then(response => {
@@ -15,6 +16,16 @@ function App() {
     })
 
   }, [])
+
+  const submitName = (resName) => {
+    console.log('submit')
+    axios.post('http://127.0.0.1:5000//predict/', resName).then(res =>{
+      console.log(res)
+    }).catch(err =>
+      console.log(err)
+      )
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -25,6 +36,9 @@ function App() {
           :
           <h3>LOADING</h3>}</div>
       </header>
+      <div>
+        <button onClick={()=>submitName(name)}>Enter Name</button>
+      </div>
     </div>
   );
 }
