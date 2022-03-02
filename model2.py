@@ -1,3 +1,4 @@
+from importlib.metadata import metadata
 import pandas as pd
 import pickle
 from sklearn.feature_extraction.text import CountVectorizer
@@ -45,11 +46,14 @@ metaData = metaData.reset_index()
 indices = pd.Series(metaData.index, index=metaData['Name'])
 count = CountVectorizer(stop_words="english")
 
-def run(inputs, metaData):
-    metaData['soup'] = metaData.apply(create_soup, axis=1)
-    metaData['soup'].head()
+def run(inputs):
+    global metaData
     global indices
     global count
+    
+    metaData['soup'] = metaData.apply(create_soup, axis=1)
+    metaData['soup'].head()
+    
     if (len(inputs) == 1):
         
         metaData = metaData.reset_index()
@@ -114,5 +118,9 @@ def getRealRec(metaData, count):
     metaData = metaData[:-1]
     return result, metaData
 
-result = run(['Kinkao', 'Rosa\'s Thai Cafe Soho', 'Tootoomoo Whetstone'], metaData)
-print(result)
+# result = run(['Kinkao', 'Rosa\'s Thai Cafe Soho', 'Tootoomoo Whetstone'])
+# print(result)
+pickle.dump(run, open('model.pkl','wb'))
+model = pickle.load(open('model.pkl','rb'))
+output = (model(['Kinkao']))
+print(output)
