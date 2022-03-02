@@ -41,15 +41,20 @@ def create_soup(x):
             )
     return soup;
 
+metaData = metaData.reset_index()
+indices = pd.Series(metaData.index, index=metaData['Name'])
+count = CountVectorizer(stop_words="english")
+
 def run(inputs, metaData):
     metaData['soup'] = metaData.apply(create_soup, axis=1)
     metaData['soup'].head()
+    global indices
+    global count
     if (len(inputs) == 1):
         
         metaData = metaData.reset_index()
         # Identify metaData Index
-        indices = pd.Series(metaData.index, index=metaData['Name'])
-        count = CountVectorizer(stop_words="english")
+        indices= pd.Series(metaData.index, index=metaData['Name'])
 
         #Another Way: tfIdVectorizer => Weight instead of Count (Give weight to frequent word)
 
@@ -57,10 +62,10 @@ def run(inputs, metaData):
         count_matrix = count.fit_transform(metaData['soup'])
         cosine_sim2 = cosine_similarity(count_matrix, count_matrix)
         
-        return give_rec(inputs[0], cosine_sim2, indices)
+        return give_rec(inputs[0], cosine_sim2)
     else:
-        indices = pd.Series(metaData.index, index=metaData['Name'])
-        metaData =giveMultiRec(len(inputs), inputs, metaData, indices)
+        # indices = pd.Series(metaData.index, index=metaData['Name'])
+        metaData =giveMultiRec(len(inputs), inputs, metaData)
         
         metaData = metaData.reset_index()
         # Identify metaData Index
@@ -68,17 +73,14 @@ def run(inputs, metaData):
         result, metaData = getRealRec(metaData, count)
         return result
     
-def give_rec(title, sig, indices):
+def give_rec(title, sig):
     #     Get the Index of Restaurant's name given
     idx = indices[title]
     
     sig_scores = list(enumerate(sig[idx]))
-
-    print(sig_scores[:5])
     
     sig_scores = sorted(sig_scores, key=lambda x: x[1], reverse=True)
     
-    print(sig_scores[:5])
     sig_scores = sig_scores[1:11]
     
     res_indices = [i[0] for i in sig_scores]
@@ -88,21 +90,17 @@ def give_rec(title, sig, indices):
 
     return resList
 
-def giveMultiRec(userNum, Names, metaData, indices):
+def giveMultiRec(userNum, Names, metaData):
     if len(Names) != userNum:
         return False
     else:
         indexes = []
         for name in Names:
             indexes.append(indices[name])
-        print(indexes)
+
         soup = ''
-        print(metaData['soup'].iloc[0])
         for i in indexes:
             soup += (metaData['soup'].iloc[i])
-#         return soup
-        print(soup)
-        print(type(metaData))
         
         metaData = metaData.append({'Name': 'Input','soup' : soup}, ignore_index=True)
         
@@ -110,11 +108,11 @@ def giveMultiRec(userNum, Names, metaData, indices):
 
 def getRealRec(metaData, count):     
     count_matrix = count.fit_transform(metaData['soup'])
-    count_matrix.shape
 
     cosine_sim3 = cosine_similarity(count_matrix, count_matrix)
     result = give_rec('Input', cosine_sim3)
     metaData = metaData[:-1]
     return result, metaData
 
-result = run(['Il Padrino', 'Bollywood Brasserie', 'Banh Banh'], metaData)
+result = run(['Kinkao', 'Rosa\'s Thai Cafe Soho', 'Tootoomoo Whetstone'], metaData)
+print(result)
