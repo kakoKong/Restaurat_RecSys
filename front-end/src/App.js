@@ -1,6 +1,7 @@
 import './App.css';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios'
+import { User } from './components/user.js';
 
 function App() {
   const [getMessage, setGetMessage] = useState({})
@@ -56,7 +57,11 @@ function App() {
         </>
           
           :
-          <h3>LOADING</h3>}</div>
+          <>
+            <h3>LOADING</h3>
+            <User />
+          </>
+          }</div>
       </header>
       
     </div>
