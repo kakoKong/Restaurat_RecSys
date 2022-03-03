@@ -4,6 +4,7 @@ from flask_restful import Api, Resource, reqparse
 from flask_cors import CORS #comment this on deployment
 import pickle
 
+import pandas as pd
 from pandas import array
 from model2 import run
 
@@ -65,3 +66,10 @@ def restaurant_prediction(name):
     result = model(name)
     
     return result
+
+@app.route('/list/', methods=['GET'])
+def getList():
+    csv_data = pd.read_csv('./data/main_data.csv')
+    csv_data = csv_data[['Name', 'URL_TA']]
+    json_data = csv_data.to_json(orient='index')
+    return json_data
