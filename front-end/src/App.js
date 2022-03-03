@@ -1,11 +1,11 @@
 import './App.css';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios'
-import { User } from './components/user.js';
+import User from './components/User.js';
 
 function App() {
   const [getMessage, setGetMessage] = useState({})
-  const [name, setName] = useState({type: 'str', message: ''})
+  const [name, setName] = useState({type: 'str', message: []})
 
   const [resList, setResList] = useState([])
   useEffect(()=>{
@@ -40,10 +40,10 @@ function App() {
         <>
           <h3>{getMessage.data.message}</h3>
           <div>
-          <button onClick={()=>setName({...name, message: 'Bollywood Brasserie'})}>Enter Name</button>
-          <button onClick={()=>setName({...name, message: 'Bar 61 Restaurant'})}>Enter Name</button>
-          <button onClick={()=>setName({...name, message: 'The Five Fields'})}>Enter Name</button>
-          <button onClick={()=>setName({...name, message: 'The Golden Chippy'})}>Enter Name</button>
+          <button onClick={()=>setName({...name, message: ['Bollywood Brasserie', 'Bar 61 Restaurant']})}>Enter Name</button>
+          <button onClick={()=>setName({...name, message: ['Bar 61 Restaurant']})}>Enter Name</button>
+          <button onClick={()=>setName({...name, message: ['The Five Fields', 'The Golden Chippy', 'Bar 61 Restaurant']})}>Enter Name</button>
+          <button onClick={()=>setName({...name, message: ['The Golden Chippy']})}>Enter Name</button>
           <div>
             <ul>
             {resList.map(res => (

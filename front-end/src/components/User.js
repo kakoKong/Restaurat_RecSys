@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-export const User = () => {
+const User = () => {
     const [users, setUsers] = useState([
         {
             uid: 0,
@@ -22,3 +22,5 @@ export const User = () => {
         </div>
     )
 }
+
+export default User;

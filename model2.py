@@ -1,6 +1,5 @@
-from importlib.metadata import metadata
-import pandas as pd
 import pickle
+import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
@@ -32,6 +31,7 @@ metaData['Price Range'] = metaData['Price Range'].replace(
      3.0: 'ExpensivePrice'}
 )
 
+# metaData['Rating'] = str(metaData['Rating'])
 # Soup = Join of Strings of the features we wanted
 # Weight (Descending): Cuisine Style, Price Range, Reviews 
 def create_soup(x):
@@ -56,7 +56,7 @@ def run(inputs):
     
     if (len(inputs) == 1):
         
-        metaData = metaData.reset_index()
+#         metaData = metaData.reset_index()
         # Identify metaData Index
         indices= pd.Series(metaData.index, index=metaData['Name'])
 
@@ -71,7 +71,7 @@ def run(inputs):
         # indices = pd.Series(metaData.index, index=metaData['Name'])
         metaData =giveMultiRec(len(inputs), inputs, metaData)
         
-        metaData = metaData.reset_index()
+#         metaData = metaData.reset_index()
         # Identify metaData Index
         indices = pd.Series(metaData.index, index=metaData['Name'])
         result, metaData = getRealRec(metaData, count)
@@ -119,8 +119,13 @@ def getRealRec(metaData, count):
     return result, metaData
 
 # result = run(['Kinkao', 'Rosa\'s Thai Cafe Soho', 'Tootoomoo Whetstone'])
+# result
 # print(result)
+# pickle.dump(run, open('model.pkl','wb'))
+# model = pickle.load(open('model.pkl','rb'))
+# output = (model(['Bollywood Brasserie', 'Bar 61 Restaurant']))
+# print(output)
 pickle.dump(run, open('model.pkl','wb'))
-model = pickle.load(open('model.pkl','rb'))
-output = (model(['Kinkao']))
-print(output)
+# model = pickle.load(open('model.pkl','rb'))
+# output = (model(['Bollywood Brasserie', 'Bar 61 Restaurant']))
+# print(output)
