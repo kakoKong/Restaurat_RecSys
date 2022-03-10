@@ -37,9 +37,12 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Restaurant Recommender System</h1>
-        <List />
+      <nav>
+        <h2>Restaurant Recommender</h2>
+      </nav>
+      <div className="App-header">
+        
+        {/* <List /> */}
         {/* <p>React + Flask Tutorial</p> */}
         <div>{getMessage.status === 200 ? 
         <>
@@ -65,12 +68,12 @@ function App() {
           
           :
           <>
-            <h3>LOADING</h3>
-            <User />
+            <div class="loader"></div>
+            {/* <User /> */}
           </>
           }</div>
-      </header>
-      
+          
+      </div>
     </div>
   );
 }
