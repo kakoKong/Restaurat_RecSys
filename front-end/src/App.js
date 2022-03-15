@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios'
 import User from './components/User.js';
 import List from './components/List';
+import Instruction from './components/Instruction';
 
 function App() {
   const [getMessage, setGetMessage] = useState({})
@@ -49,7 +50,8 @@ function App() {
         <>
           {/* <h3>{getMessage.data.message}</h3> */}
           <div class="card">
-          <List />
+            <Instruction />
+          {/* <List /> */}
           {/* <div>
            <>
               {load ? (<><div class="loader"></div></>) :

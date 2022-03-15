@@ -1,0 +1,10 @@
+ol{
+    list-style: decimal;
+}
+li{
+    font-size: 10px;
+    list-style: decimal;
+    margin: 5px;
+    /* margin: 5px; */
+    /* margin: 5px; */
+}

@@ -10,7 +10,7 @@ const List = () => {
         axios.get('http://127.0.0.1:5000//list/')
         .then( (res) =>{
             // console.log(res.data.length())
-            console.log(typeof(res.data[0]))
+            // console.log(typeof(res.data[0]))
             // console.log()
             
             setNames(Object.entries(res.data))
@@ -32,6 +32,9 @@ const List = () => {
             alert('Choose Too Much')
         }
     }
+    const reset = () => {
+        setChoosen([])
+    }
     return (
         <>
         {/* <div> */}
@@ -50,6 +53,7 @@ const List = () => {
         {choosen.map((res) => {
             return(<p key={res[0]}>{res[1].Name}</p>) 
         })}
+        <button onClick={()=>reset()}>Reset</button>
         </div>
         </>
     )

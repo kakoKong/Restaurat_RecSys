@@ -53,13 +53,13 @@
   }
 }
 
-li{
+/* li{
   list-style: none;
 }
 ul{
   list-style: none;
   /* white-space:nowrap; */
-}
+/* } */
 nav{
   position: absolute;
   background-color: white;
@@ -93,7 +93,7 @@ nav{
   text-align: center;
   width: 15em;
   height: 100%;
-  background-color: bisque;
+  background-color: rgb(160, 118, 67);
   margin: auto auto;
   margin-top: 20%;
   margin-bottom: 10%;
