@@ -7,33 +7,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 metaData = pd.read_csv('./data/main_data.csv', engine='python');
 metaData = metaData.drop(columns = 'Unnamed: 0')
 
-# Remove Any Useless String
-def cleaning(x):
-    cleanFeatures = ['[', ']', "'", '"', ',']
-    for feature in cleanFeatures:
-        x = x.replace(feature, '')
-    return x
-
-# Clean data inside these 2 features
-features = ['Cuisine Style', 'Reviews']
-
-for feature in features:
-    metaData[feature] = metaData[feature].apply(cleaning)
-    
-# Clean the data that has same name, keep the one that have higher rating
-metaData['Rating'] = metaData['Rating'].round(1)
-metaData = metaData.drop_duplicates(subset=['Name'], keep="first")
-
-#Rename the Price Range into String
-metaData['Price Range'] = metaData['Price Range'].replace(
-    {1.0 : 'CheapPrice', 
-     2.0 : 'MediumPrice', 
-     3.0: 'ExpensivePrice'}
-)
-
-# metaData['Rating'] = str(metaData['Rating'])
 # Soup = Join of Strings of the features we wanted
-# Weight (Descending): Cuisine Style, Price Range, Reviews 
 def create_soup(x):
     soup =  (''.join(x['Cuisine Style']) + ' ' + 
              ''.join(x['Reviews']) + ' ' +
@@ -126,6 +100,6 @@ def getRealRec(metaData, count):
 # output = (model(['Bollywood Brasserie', 'Bar 61 Restaurant']))
 # print(output)
 pickle.dump(run, open('model.pkl','wb'))
-# model = pickle.load(open('model.pkl','rb'))
-# output = (model(['Bollywood Brasserie', 'Bar 61 Restaurant']))
-# print(output)
+model = pickle.load(open('model.pkl','rb'))
+output = (model(['Bollywood Brasserie', 'Bar 61 Restaurant']))
+print(output)

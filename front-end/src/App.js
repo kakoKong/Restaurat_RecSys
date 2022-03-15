@@ -7,6 +7,7 @@ import List from './components/List';
 function App() {
   const [getMessage, setGetMessage] = useState({})
   const [name, setName] = useState({type: 'str', message: []})
+  const [post, setPost] = useState({type: 'str', input: 0, message: []})
   const [load, setLoad] = useState(false)
 
   const [resList, setResList] = useState([])
@@ -42,27 +43,24 @@ function App() {
       </nav>
       <div className="App-header">
         
-        {/* <List /> */}
+        
         {/* <p>React + Flask Tutorial</p> */}
         <div>{getMessage.status === 200 ? 
         <>
-          <h3>{getMessage.data.message}</h3>
-          <div>
-          <button onClick={()=>setName({...name, message: ['Bollywood Brasserie', 'Bar 61 Restaurant']})}>Enter Name</button>
-          <button onClick={()=>setName({...name, message: ['Bar 61 Restaurant']})}>Enter Name</button>
-          <button onClick={()=>setName({...name, message: ['The Five Fields', 'The Golden Chippy', 'Bar 61 Restaurant']})}>Enter Name</button>
-          <button onClick={()=>setName({...name, message: ['The Golden Chippy']})}>Enter Name</button>
-          <div>
-            <ul>
-              {load ? (<><h1>Loading...</h1></>) :
+          {/* <h3>{getMessage.data.message}</h3> */}
+          <div class="card">
+          <List />
+          {/* <div>
+           <>
+              {load ? (<><div class="loader"></div></>) :
               resList.map((res, index) => (
-              
-                <li key={index}>{res}</li>)
-              
-              )
+                <ul>
+                <li key={index}>{res}</li>
+                </ul>
+              ))
               }
-            </ul>
-          </div>
+            </>
+          </div> */}
         </div>
         </>
           

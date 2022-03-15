@@ -56,11 +56,16 @@
 li{
   list-style: none;
 }
+ul{
+  list-style: none;
+  /* white-space:nowrap; */
+}
 nav{
   position: absolute;
   background-color: white;
   width: 100%;
   top: 0;
+  
   /* padding: 0; */
 }
 
@@ -76,4 +81,22 @@ nav{
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+.card {
+  /* position: absolute; */
+  /* top: 50%; */
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 15em;
+  height: 100%;
+  background-color: bisque;
+  margin: auto auto;
+  margin-top: 20%;
+  margin-bottom: 10%;
+  padding: 1.5em 4em;
+  border-radius: 10px;
 }

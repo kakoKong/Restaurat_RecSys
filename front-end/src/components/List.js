@@ -5,6 +5,7 @@ const List = () => {
     const [data, setData] = useState([])
     const [names, setNames] = useState([])
     const [urls, setUrl] = useState([])
+    const [choosen, setChoosen] = useState([])
     useEffect( () => {  
         axios.get('http://127.0.0.1:5000//list/')
         .then( (res) =>{
@@ -16,28 +17,40 @@ const List = () => {
             // console.log(data.Name)
             // console.log(typeof(names))
             // setNames(Object.entries(names[1]))
-            console.log(typeof(names))
-            console.log(names.slice(0, 10))
+            // console.log(typeof(names))
+            // console.log(names.slice(0, 10))
         })
         .catch(err => console.log(err))
-    }, [])
+        console.log(choosen)
+    }, [choosen])
 
-
+    const addToList = (restaurant) => {
+        if (choosen.length<4){
+            setChoosen([...choosen, restaurant])
+        }
+        else{
+            alert('Choose Too Much')
+        }
+    }
     return (
         <>
+        {/* <div> */}
+            {/* <h4>List</h4> */}
+        {/* </div> */}
         <div>
-            <h4>List</h4>
-        </div>
-        <li>
 
-        
-        {names.slice(0, 10).map((restaurant) => {
-            console.log(restaurant[1].Name)
+        <h3>List</h3>
+        {names.slice(0, 20).map((restaurant) => {
+            // console.log(restaurant[1].Name)
             return(
-            <li key={restaurant[0]}>{restaurant[1].Name}</li>
+            <button onClick={()=>addToList(restaurant)} key={restaurant[0]}>{restaurant[1].Name}</button>
         )
         })}
-        </li>
+        <h2>Your Choices</h2>
+        {choosen.map((res) => {
+            return(<p key={res[0]}>{res[1].Name}</p>) 
+        })}
+        </div>
         </>
     )
 }
