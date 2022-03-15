@@ -1,15 +1,14 @@
 import './App.css';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios'
-import User from './components/User.js';
-import List from './components/List';
-import Instruction from './components/Instruction';
+import Card from './components/Card';
 
 function App() {
   const [getMessage, setGetMessage] = useState({})
   const [name, setName] = useState({type: 'str', message: []})
   const [post, setPost] = useState({type: 'str', input: 0, message: []})
   const [load, setLoad] = useState(false)
+  const [state, setState] = useState(0)
 
   const [resList, setResList] = useState([])
   useEffect(()=>{
@@ -21,7 +20,7 @@ function App() {
     })
     // console.log(name)
     submitName(name)
-  }, [name])
+  }, [name, state])
 
   const submitName = async (resName) => {
     
@@ -37,6 +36,14 @@ function App() {
       )
   }
 
+  const nextPage = () => {
+    setState(state+1)
+  }
+
+  const prevPage = () => {
+    setState(state-1)
+  }
+
   return (
     <div className="App">
       <nav>
@@ -49,27 +56,25 @@ function App() {
         <div>{getMessage.status === 200 ? 
         <>
           {/* <h3>{getMessage.data.message}</h3> */}
-          <div class="card">
-            <Instruction />
-          {/* <List /> */}
-          {/* <div>
-           <>
-              {load ? (<><div class="loader"></div></>) :
-              resList.map((res, index) => (
-                <ul>
-                <li key={index}>{res}</li>
-                </ul>
-              ))
-              }
-            </>
-          </div> */}
+          <div className="card">
+            <div className='cardContext'>
+            <Card state={state}/>
+            
+            </div>
+           <div>
+             {state == 0 ? <button onClick={()=>nextPage()} className='nextButton'>Next</button>
+             : <><button onClick={()=>prevPage()} className='nextButton'>Back</button>
+             <button onClikc={()=>nextPage()}className='nextButton'>Next</button>
+             </>
+             }
+            
+           </div>
         </div>
         </>
           
           :
           <>
-            <div class="loader"></div>
-            {/* <User /> */}
+            <div className="loader"></div>
           </>
           }</div>
           

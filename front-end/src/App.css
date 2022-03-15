@@ -86,11 +86,7 @@ nav{
 .card {
   /* position: absolute; */
   /* top: 50%; */
-  
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+ 
   width: 15em;
   height: 100%;
   background-color: rgb(160, 118, 67);
@@ -99,4 +95,15 @@ nav{
   margin-bottom: 10%;
   padding: 1.5em 4em;
   border-radius: 10px;
+}
+
+.cardContext {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+ 
+.nextButton{
+  display: inline-block;
 }
