@@ -37,6 +37,7 @@ function App() {
   }
 
   const nextPage = () => {
+    console.log(state)
     setState(state+1)
   }
 
@@ -64,7 +65,7 @@ function App() {
            <div>
              {state == 0 ? <button onClick={()=>nextPage()} className='nextButton'>Next</button>
              : <><button onClick={()=>prevPage()} className='nextButton'>Back</button>
-             <button onClikc={()=>nextPage()}className='nextButton'>Next</button>
+             <button onClick={()=>nextPage()}className='nextButton'>Next</button>
              </>
              }
             

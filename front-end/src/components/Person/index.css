@@ -1,0 +1,23 @@
+.container{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.userCard{
+    border: 1px solid white;
+    padding: .5em 2em;
+    margin: .5em .5em;
+    cursor: pointer;
+    transition: 500ms ease-in-out;
+}
+
+.userCard:hover{
+    background-color: white;
+    color: rgb(149, 107, 55);
+}
+
+.userCard:focus{
+    background-color: white;
+    color: rgb(149, 107, 55);
+}
