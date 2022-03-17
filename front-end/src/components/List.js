@@ -10,16 +10,9 @@ const List = (props) => {
     useEffect( () => {  
         axios.get('http://127.0.0.1:5000//list/')
         .then( (res) =>{
-            // console.log(res.data.length())
-            // console.log(typeof(res.data[0]))
-            // console.log()
-            
+
             setNames(Object.entries(res.data))
-            // console.log(data.Name)
-            // console.log(typeof(names))
-            // setNames(Object.entries(names[1]))
-            // console.log(typeof(names))
-            // console.log(names.slice(0, 10))
+            
         })
         .catch(err => console.log(err))
         // console.log(choosen)
@@ -61,7 +54,7 @@ const List = (props) => {
             return(<p>{res}</p>) 
         })}
         {/* <h4>]</h4> */}
-        <button onClick={()=>reset()}>Reset</button>
+        <button disabled={choosen.length == 0} onClick={()=>reset()}>Reset</button>
         <button disabled={choosen.length == userNumber ? false : true} onClick={() => handleSubmit(choosen)}>Confirm</button>
         </div>
         </>
