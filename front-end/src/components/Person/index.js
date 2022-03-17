@@ -7,6 +7,7 @@ const User = (props) => {
 
     const handleChange = (num) => {
         props.changeUser(num)
+        props.setState(props.state + 1)
     }
 
     return (

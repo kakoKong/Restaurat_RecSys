@@ -27,7 +27,7 @@ const List = (props) => {
 
     const addToList = (restaurant) => {
         if (choosen.length<userNumber){
-            setChoosen([...choosen, restaurant])
+            setChoosen([...choosen, restaurant[1].Name])
         }
         else{
             alert(`Already had ${userNumber} restaurant(s) chosen`)
@@ -39,6 +39,7 @@ const List = (props) => {
 
     const handleSubmit = (restaurant) => {
         props.setRes(restaurant)
+        props.setState(props.state + 1)
     }
     return (
         <>
@@ -57,7 +58,7 @@ const List = (props) => {
         <h2>Your Choices</h2>
         {/* <h4>[</h4> */}
         {choosen.map((res) => {
-            return(<p key={res[0]}>{res[1].Name}</p>) 
+            return(<p>{res}</p>) 
         })}
         {/* <h4>]</h4> */}
         <button onClick={()=>reset()}>Reset</button>

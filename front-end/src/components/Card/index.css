@@ -13,12 +13,28 @@
   }
   
   .cardContext {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* text-align: center; */
   }
    
   .nextButton{
+    margin: 0.5em;
     display: inline-block;
+    font-size: 20px;
+    border: white solid 1px;
+    padding: 3px 5px;
+    border-radius: 5px;
+    background-color: white;
+    color: rgb(143, 110, 71);
+    font-weight: bold;
+    box-shadow: none;
+    transition: 300ms ease-in-out;
+    cursor: pointer;
+  }
+
+  .nextButton:hover{
+    color:white;
+    background-color: rgb(66, 66, 66);
   }

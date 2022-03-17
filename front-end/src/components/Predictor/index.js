@@ -5,6 +5,7 @@ import './index.css'
 const Predictor = (props) => {
     
     const [ load, setLoad ] = useState(false);
+    const [ predict, setPredict] = useState(false);
     const [post, setPost] = useState({type: 'str',  message: props.chosenRes})
 
     const submitName = async (resName) => {
@@ -16,11 +17,16 @@ const Predictor = (props) => {
         //   console.log(typeof(res.data))
           props.setResult(Object.values(res.data))
           setLoad(false)
+          setPredict(true)
+        //   console.log(post)
         }).catch(err =>
           console.log(err)
           )
       }
 
+      const handleSubmit = () => {
+          props.setState(props.state+1)
+      }
     return (
         <>
         
@@ -28,12 +34,12 @@ const Predictor = (props) => {
             <h2>Confirm your Choice</h2>
             <div className='list'>
                 {post.message.map((res) => {
-                    return(<p key={res[0]}>{res[1].Name}</p>
+                    return(<p>{res}</p>
                 )})}
             </div>
             <button onClick={()=>submitName(post)}>Predict</button>
             <div>
-                {load ? <div className='loaderz'></div> : <><p>Continue</p></>}
+                {load ? <div className='loaderz'></div> : predict ? <button onClick={()=>handleSubmit()}>View Result</button> : ''}
             </div>
 
         </div>

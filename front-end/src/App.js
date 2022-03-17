@@ -36,14 +36,7 @@ function App() {
       )
   }
 
-  const nextPage = () => {
-    console.log(state)
-    setState(state+1)
-  }
 
-  const prevPage = () => {
-    setState(state-1)
-  }
 
   return (
     <div className="App">
@@ -59,15 +52,11 @@ function App() {
           {/* <h3>{getMessage.data.message}</h3> */}
           <div className="card">
             <div className='cardContext'>
-            <Card state={state}/>
+            <Card/>
             
             </div>
            <div>
-             {state == 0 ? <button onClick={()=>nextPage()} className='nextButton'>Next</button>
-             : <><button onClick={()=>prevPage()} className='nextButton'>Back</button>
-             <button onClick={()=>nextPage()}className='nextButton'>Next</button>
-             </>
-             }
+             
             
            </div>
         </div>
