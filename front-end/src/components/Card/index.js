@@ -1,7 +1,7 @@
 import './index.css'
 import React, {useEffect, useState} from 'react'
 import Instruction from '../Instruction';
-import List from '../List';
+import List from '../List/List';
 import User from '../Person';
 import Predictor from '../Predictor';
 import Recommend from '../Recommend';

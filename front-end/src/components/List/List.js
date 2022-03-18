@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import './index.css'
 
 const List = (props) => {
     const [data, setData] = useState([])
@@ -54,8 +55,8 @@ const List = (props) => {
             return(<p>{res}</p>) 
         })}
         {/* <h4>]</h4> */}
-        <button disabled={choosen.length == 0} onClick={()=>reset()}>Reset</button>
-        <button disabled={choosen.length == userNumber ? false : true} onClick={() => handleSubmit(choosen)}>Confirm</button>
+        <button className='listButton' disabled={choosen.length == 0} onClick={()=>reset()}>Reset</button>
+        <button className='listButton' disabled={choosen.length == userNumber ? false : true} onClick={() => handleSubmit(choosen)}>Confirm</button>
         </div>
         </>
     )

@@ -37,9 +37,10 @@ const Predictor = (props) => {
                     return(<p>{res}</p>
                 )})}
             </div>
-            <button onClick={()=>submitName(post)}>Predict</button>
+            {predict ? '' : <button className="predict" onClick={()=>submitName(post)}>Predict</button>}
+            
             <div>
-                {load ? <div className='loaderz'></div> : predict ? <button onClick={()=>handleSubmit()}>View Result</button> : ''}
+                {load ? <div className="loaderDiv"> <div className='loaderz'></div></div> : predict ? <button className="result" onClick={()=>handleSubmit()}>View Result</button> : ''}
             </div>
 
         </div>
