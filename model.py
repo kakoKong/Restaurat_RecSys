@@ -1,29 +1,13 @@
-import pandas as pd
 import pickle
+import pandas as pd
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 
+# Import Data
 metaData = pd.read_csv('./data/main_data.csv', engine='python');
 metaData = metaData.drop(columns = 'Unnamed: 0')
 
-def cleaning(x):
-    cleanFeatures = ['[', ']', "'", '"', ',']
-    for feature in cleanFeatures:
-        x = x.replace(feature, '')
-    return x
-
-features = ['Cuisine Style', 'Reviews']
-
-for feature in features:
-    metaData[feature] = metaData[feature].apply(cleaning)
-
-metaData['Rating'] = metaData['Rating'].round(1)
-metaData = metaData.drop_duplicates(subset=['Name'], keep="first")
-
-metaData['Price Range'] = metaData['Price Range'].replace(
-    {1.0 : 'CheapPrice', 
-     2.0 : 'MediumPrice', 
-     3.0: 'ExpensivePrice'}
-)
-
+# Soup = Join of Strings of the features we wanted
 def create_soup(x):
     soup =  (''.join(x['Cuisine Style']) + ' ' + 
              ''.join(x['Reviews']) + ' ' +
@@ -32,29 +16,47 @@ def create_soup(x):
             )
     return soup;
 
-#Making a Soup
-metaData['soup'] = metaData.apply(create_soup, axis=1)
-metaData['soup'].head()
-
-from sklearn.feature_extraction.text import CountVectorizer
-count = CountVectorizer(stop_words="english")
-
-count_matrix = count.fit_transform(metaData['soup'])
-count_matrix.shape
-
 metaData = metaData.reset_index()
 indices = pd.Series(metaData.index, index=metaData['Name'])
+count = CountVectorizer(stop_words="english")
 
-from sklearn.metrics.pairwise import cosine_similarity
+def run(inputs):
+    global metaData
+    global indices
+    global count
+    
+    metaData['soup'] = metaData.apply(create_soup, axis=1)
+    metaData['soup'].head()
+    
+    if (len(inputs) == 1):
+        
+#         metaData = metaData.reset_index()
+        # Identify metaData Index
+        indices= pd.Series(metaData.index, index=metaData['Name'])
 
-cosine_sim2 = cosine_similarity(count_matrix, count_matrix)
+        #Another Way: tfIdVectorizer => Weight instead of Count (Give weight to frequent word)
 
-def give_rec(title, sig=cosine_sim2):
+        # Return Matrix of count words
+        count_matrix = count.fit_transform(metaData['soup'])
+        cosine_sim2 = cosine_similarity(count_matrix, count_matrix)
+        
+        return give_rec(inputs[0], cosine_sim2)
+    else:
+        # indices = pd.Series(metaData.index, index=metaData['Name'])
+        metaData =giveMultiRec(len(inputs), inputs, metaData)
+        
+#         metaData = metaData.reset_index()
+        # Identify metaData Index
+        indices = pd.Series(metaData.index, index=metaData['Name'])
+        result, metaData = getRealRec(metaData, count)
+        return result
+    
+def give_rec(title, sig):
+    #     Get the Index of Restaurant's name given
     idx = indices[title]
-#     print(sig[idx])
+    
     sig_scores = list(enumerate(sig[idx]))
-#     print(sig_scores)
-
+    
     sig_scores = sorted(sig_scores, key=lambda x: x[1], reverse=True)
     
     sig_scores = sig_scores[1:11]
@@ -63,14 +65,41 @@ def give_rec(title, sig=cosine_sim2):
     
     resList = []
     resList = (metaData['Name'].iloc[res_indices].values)
-#     print(metaData['Name'].)
+
     return resList
 
+def giveMultiRec(userNum, Names, metaData):
+    if len(Names) != userNum:
+        return False
+    else:
+        indexes = []
+        for name in Names:
+            indexes.append(indices[name])
 
-pickle.dump(give_rec, open('model.pkl','wb'))
+        soup = ''
+        for i in indexes:
+            soup += (metaData['soup'].iloc[i])
+        
+        metaData = metaData.append({'Name': 'Input','soup' : soup}, ignore_index=True)
+        
+        return metaData
 
-# print(give_rec('Bollywood Brasserie'))
+def getRealRec(metaData, count):     
+    count_matrix = count.fit_transform(metaData['soup'])
 
+    cosine_sim3 = cosine_similarity(count_matrix, count_matrix)
+    result = give_rec('Input', cosine_sim3)
+    metaData = metaData[:-1]
+    return result, metaData
+
+# result = run(['Kinkao', 'Rosa\'s Thai Cafe Soho', 'Tootoomoo Whetstone'])
+# result
+# print(result)
+# pickle.dump(run, open('model.pkl','wb'))
 # model = pickle.load(open('model.pkl','rb'))
-# output = (model('Bollywood Brasserie'))
-# print(output[0])
+# output = (model(['Bollywood Brasserie', 'Bar 61 Restaurant']))
+# print(output)
+pickle.dump(run, open('model.pkl','wb'))
+model = pickle.load(open('model.pkl','rb'))
+output = (model(['Bollywood Brasserie', 'Bar 61 Restaurant']))
+print(output)

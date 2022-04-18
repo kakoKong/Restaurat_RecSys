@@ -6,7 +6,7 @@ import pickle
 
 import pandas as pd
 from pandas import array
-from model2 import run
+from model import run
 
 #create an instance of Flask
 app = Flask(__name__, static_folder='front-end/build')
@@ -20,7 +20,7 @@ if __name__ == '__main__':
     app.run(host='localhost', debug=True)
     
 
-@app.route('/predict/', methods=['GET','POST'])
+@app.route('/predict/', methods=['POST'])
 def predict():
     
     if request.method == "POST":
@@ -53,11 +53,7 @@ def predict():
         
         except ValueError:
             return 'invalid Value'
-        pass
-    
-    elif request.method == 'GET':
-        return 'Hello from flask'
-    pass 
+    pass
 
 def restaurant_prediction(name):
     #Load Machine Learning Model
