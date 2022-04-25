@@ -21,7 +21,7 @@ In the ./app directory, run command
 ``flask run``
 it should return back-end server running in ``http://127.0.0.1:5000``
 
-## 2. Frontend server
+### 2. Frontend server
 In the ./app/front-end directory, run command
 ``npm start``
 to run the front-end server, and this is where user will be interating with the application
