@@ -65,7 +65,7 @@ def restaurant_prediction(name):
 
 @app.route('/list/', methods=['GET'])
 def getList():
-    csv_data = pd.read_csv('./data/main_data.csv')
-    csv_data = csv_data[['Name', 'URL_TA']]
+    csv_data = pd.read_csv('./data/simple_data.csv')
+    csv_data = csv_data[['value', 'label']]
     json_data = csv_data.to_json(orient='index')
     return json_data
