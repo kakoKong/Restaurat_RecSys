@@ -14,8 +14,6 @@ const Card = (props) => {
     const [restaurant, setRestaurant] = useState([])
     const [resList, setResList] = useState([])
     useEffect(() => {
-        console.log(restaurant)
-        // console.log(resList)
     }, [restaurant, state])
 
     if (state === 0){
@@ -66,10 +64,8 @@ const Card = (props) => {
 
 const Buttons = (props) => {
 
-    console.log(props.state)
     const state = props.state
     const nextPage = () => {
-        // console.log(state)
         props.setState(props.state+1)
       }
     
@@ -84,7 +80,7 @@ const Buttons = (props) => {
     return(
         <>
         
-        {state == 0 ? <button onClick={()=>nextPage()} className='nextButton'>Next</button>
+        {state === 0 ? <button onClick={()=>nextPage()} className='nextButton'>Next</button>
         : state < 4 ? <><button onClick={()=>prevPage()} className='nextButton'>Back</button></>
         : <><button onClick={()=>resetPage()} className='nextButton'>Back to Beginning</button></> 
              }

@@ -64,8 +64,7 @@ def give_rec(title, sig):
     
     res_indices = [i[0] for i in sig_scores]
     
-    resList = []
-    resList = (metaData['Name'].iloc[res_indices].values)
+    resList = (metaData[['Name', 'Cuisine Style', 'Rating', 'URL_TA']].iloc[res_indices])
 
     return resList
 

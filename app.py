@@ -10,6 +10,7 @@ from model import run
 
 #create an instance of Flask
 app = Flask(__name__, static_folder='front-end/build')
+app.config['JSON_SORT_KEYS'] = False
 # app = Flask(__name__, static_url_path='', static_folder='frontend/build')
 CORS(app)
 #Route to home page
@@ -38,18 +39,15 @@ def predict():
         ret_status = request_type
         ret_msg = request_json
         #get form data
-        print('eueu')
-        print(type(ret_msg))
         
         try:
             output = restaurant_prediction(ret_msg)
-            result = {}
-            i = 1
-            for value in output:
-                result[str(i)] = value
-                i += 1
+            output = output[['Name', 'Cuisine Style', 'Rating', 'URL_TA']]
+            # print(type(output))
+            result = output.to_json(orient="records")
+
             print(result)
-            return jsonify(result)
+            return result
         
         except ValueError:
             return 'invalid Value'
@@ -58,9 +56,7 @@ def predict():
 def restaurant_prediction(name):
     #Load Machine Learning Model
     model = pickle.load(open('model.pkl','rb'))
-    print(name)
     result = model(name)
-    
     return result
 
 @app.route('/list/', methods=['GET'])

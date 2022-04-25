@@ -2,21 +2,14 @@
     /* position: absolute; */
     /* top: 50%; */
    
-    width: 15em;
+    width: 20em;
     height: 100%;
     background-color: rgb(160, 118, 67);
     margin: auto auto;
     margin-top: 20%;
     margin-bottom: 10%;
-    padding: 1em 1em;
+    padding: 1em 2em;
     border-radius: 10px;
-  }
-  
-  .cardContext {
-    /* display: flex; */
-    /* justify-content: center; */
-    /* align-items: center; */
-    /* text-align: center; */
   }
    
   .nextButton{

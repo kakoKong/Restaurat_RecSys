@@ -14,7 +14,6 @@ const List = (props) => {
             setNames(Object.entries(res.data))
         })
         .catch(err => console.log(err))
-        // console.log(choosen)
     }, [chosen])
 
     const addToList = (restaurant) => {
@@ -22,7 +21,7 @@ const List = (props) => {
             setChosen([...chosen, restaurant.value])
         }
         else{
-            alert(`Already had ${userNumber} restaurant(s) chosen`)
+            alert(`Already had ${userNumber} restaurant(s) chosen, please press back and come to this page again`)
         }
     }
 
@@ -57,7 +56,7 @@ const List = (props) => {
         {chosen.map((res) => {
             return(<p>{res}</p>) 
         })}
-        <button className='confirmButton' disabled={chosen.length == userNumber ? false : true} onClick={() => handleSubmit(chosen)}>Confirm</button>
+        <button className='confirmButton' disabled={chosen.length === userNumber ? false : true} onClick={() => handleSubmit(chosen)}>Confirm</button>
         </div>
         </>
     )

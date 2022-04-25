@@ -23,4 +23,34 @@
 .drop-down {
     color:black;
     margin: 1em;
+    cursor: pointer;
+}
+
+.restaurant-card{
+    border: 3px solid rgb(216, 216, 216);
+    margin: 20px;
+    padding: 20px 15px;
+    padding-top: 0;
+    border-radius: 10px;
+    transition: 500ms ease-in-out;
+}
+
+.restaurant-card p{
+    font-size: 15px;
+}
+a .restaurant-card{
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+}
+
+a:link{
+    text-decoration: none;
+}
+
+.restaurant-card:hover{
+    background-color: white;
+    color: rgb(173, 132, 22);
 }

@@ -10,15 +10,14 @@ const Predictor = (props) => {
 
     const submitName = async (resName) => {
     
-        console.log(resName)
         setLoad(true)
         await axios.post('http://127.0.0.1:5000//predict/', resName).then(res =>{
-          props.setResult(Object.values(res.data))
-          setLoad(false)
-          setPredict(true)
+            props.setResult(Object.values(res.data))
+            setLoad(false)
+            setPredict(true)
         }).catch(err =>
-          console.log(err)
-          )
+            console.log(err)
+            )
       }
 
       const handleSubmit = () => {

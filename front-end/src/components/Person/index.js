@@ -3,8 +3,6 @@ import './index.css'
 
 const User = (props) => {
 
-    // const [numUser, setNumUser] = useState(0);
-
     const handleChange = (num) => {
         props.changeUser(num)
         props.setState(props.state + 1)
