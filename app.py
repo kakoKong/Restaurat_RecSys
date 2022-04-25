@@ -1,6 +1,6 @@
 #import Flask
-from flask import Flask, render_template, request, jsonify
-from flask_restful import Api, Resource, reqparse
+from flask import Flask, render_template, request
+from flask_restful import reqparse
 from flask_cors import CORS #comment this on deployment
 import pickle
 
