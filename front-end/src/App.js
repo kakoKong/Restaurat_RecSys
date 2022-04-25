@@ -12,31 +12,13 @@ function App() {
 
   const [resList, setResList] = useState([])
   useEffect(()=>{
-    axios.get('http://127.0.0.1:5000//predict/').then(response => {
+    axios.get('http://127.0.0.1:5000/').then(response => {
       // console.log("SUCCESS", response)
       setGetMessage(response)
     }).catch(error => {
       console.log(error)
     })
-    // console.log(name)
-    submitName(name)
-  }, [name, state])
-
-  const submitName = async (resName) => {
-    
-    console.log(resName)
-    setLoad(true)
-    await axios.post('http://127.0.0.1:5000//predict/', resName).then(res =>{
-      console.log(res)
-      console.log(typeof(res.data))
-      setResList(Object.values(res.data))
-      setLoad(false)
-    }).catch(err =>
-      console.log(err)
-      )
-  }
-
-
+  }, [state])
 
   return (
     <div className="App">
@@ -56,12 +38,10 @@ function App() {
             
             </div>
            <div>
-             
-            
            </div>
         </div>
         </>
-          
+    
           :
           <>
             <div className="loader"></div>

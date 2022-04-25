@@ -13,12 +13,9 @@ const Predictor = (props) => {
         console.log(resName)
         setLoad(true)
         await axios.post('http://127.0.0.1:5000//predict/', resName).then(res =>{
-        //   console.log(res)
-        //   console.log(typeof(res.data))
           props.setResult(Object.values(res.data))
           setLoad(false)
           setPredict(true)
-        //   console.log(post)
         }).catch(err =>
           console.log(err)
           )

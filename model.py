@@ -10,9 +10,12 @@ metaData = metaData.drop(columns = 'Unnamed: 0')
 # Soup = Join of Strings of the features we wanted
 def create_soup(x):
     soup =  (''.join(x['Cuisine Style']) + ' ' + 
+             ''.join(x['Cuisine Style']) + ' ' + 
+             ''.join(x['Cuisine Style']) + ' ' + 
              ''.join(x['Reviews']) + ' ' +
              ''.join(str(x['Rating'])) + ' ' +
-             ''.join(x['Price Range'])
+             ''.join(x['Price Range']) + ' ' +
+             ''.join(x['Price Range']) + ' '
             )
     return soup;
 
@@ -30,8 +33,6 @@ def run(inputs):
     
     if (len(inputs) == 1):
         
-#         metaData = metaData.reset_index()
-        # Identify metaData Index
         indices= pd.Series(metaData.index, index=metaData['Name'])
 
         #Another Way: tfIdVectorizer => Weight instead of Count (Give weight to frequent word)

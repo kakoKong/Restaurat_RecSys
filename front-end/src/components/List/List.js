@@ -9,11 +9,9 @@ const List = (props) => {
     const [choosen, setChoosen] = useState([])
     const userNumber = props.userNumber;
     useEffect( () => {  
-        axios.get('http://127.0.0.1:5000//list/')
+        axios.get('http://127.0.0.1:5000/list/')
         .then( (res) =>{
-
-            setNames(Object.entries(res.data))
-            
+            setNames(Object.entries(res.data))   
         })
         .catch(err => console.log(err))
         // console.log(choosen)
