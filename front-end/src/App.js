@@ -18,7 +18,7 @@ function App() {
   return (
     <div className="App">
       <nav>
-        <h2>Restaurant Recommender</h2>
+        <h2>London Restaurant Recommender</h2>
       </nav>
       <div className="App-header">
   
