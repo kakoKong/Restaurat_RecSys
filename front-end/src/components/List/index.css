@@ -1,19 +1,26 @@
-.listButton{
+.confirmButton{
     /* margin-bottom: 20px; */
-    margin: 20px 5px;
+    margin: 10px 5px;
+    padding: 10px;
     font-size: 12px;
+    font-weight: bold;
     border: none;
     background-color: white;
     cursor: pointer;
     transition: 200ms ease-in-out;
 }
 
-.listButton:hover{
+.confirmButton:hover{
     background-color: rgb(185, 131, 64);
     color: white;
 }
 
-.listButton:disabled{
+.confirmButton:disabled{
     background-color: rgb(161, 161, 161);
     cursor:auto;
+}
+
+.drop-down {
+    color:black;
+    margin: 1em;
 }

@@ -73,16 +73,20 @@ const Buttons = (props) => {
         props.setState(props.state+1)
       }
     
-      const prevPage = () => {
-        props.setState(props.state-1)
-      }
+    const prevPage = () => {
+    props.setState(props.state-1)
+    }
+
+    const resetPage = () => {
+        props.setState(0)
+    }
 
     return(
         <>
         
         {state == 0 ? <button onClick={()=>nextPage()} className='nextButton'>Next</button>
-        : <><button onClick={()=>prevPage()} className='nextButton'>Back</button>
-             </> 
+        : state < 4 ? <><button onClick={()=>prevPage()} className='nextButton'>Back</button></>
+        : <><button onClick={()=>resetPage()} className='nextButton'>Back to Beginning</button></> 
              }
         </>
     )

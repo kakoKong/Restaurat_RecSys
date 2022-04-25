@@ -1,60 +1,63 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import Select from 'react-select'
 import './index.css'
 
 const List = (props) => {
-    const [data, setData] = useState([])
     const [names, setNames] = useState([])
-    const [urls, setUrl] = useState([])
-    const [choosen, setChoosen] = useState([])
+    const [chosen, setChosen] = useState([])
+
     const userNumber = props.userNumber;
     useEffect( () => {  
         axios.get('http://127.0.0.1:5000/list/')
         .then( (res) =>{
-            setNames(Object.entries(res.data))   
+            setNames(Object.entries(res.data))
         })
         .catch(err => console.log(err))
         // console.log(choosen)
-    }, [choosen])
+    }, [chosen])
 
     const addToList = (restaurant) => {
-        if (choosen.length<userNumber){
-            setChoosen([...choosen, restaurant[1].Name])
+        if (chosen.length<userNumber){
+            setChosen([...chosen, restaurant.value])
         }
         else{
             alert(`Already had ${userNumber} restaurant(s) chosen`)
         }
-    }
-    const reset = () => {
-        setChoosen([])
     }
 
     const handleSubmit = (restaurant) => {
         props.setRes(restaurant)
         props.setState(props.state + 1)
     }
+
+    const options = names.map(item => {
+        return item[1]
+    })
+
+    const inputs = [];
+    for(let i= 0; i<userNumber; i++){
+        inputs.push(
+        <Select 
+            className='drop-down'
+            options={options}
+            name={`user${i}`}
+            onChange={(value) => addToList(value)}
+            key = {i}
+        />
+        )
+    }
     return (
         <>
-        {/* <div> */}
-            {/* <h4>List</h4> */}
-        {/* </div> */}
         <div>
 
         <h3>{userNumber} Person(s)</h3>
-        {names.slice(0, 20).map((restaurant) => {
-            // console.log(restaurant[1].Name)
-            return(
-            <button onClick={()=>addToList(restaurant)} key={restaurant[0]}>{restaurant[1].Name}</button>
-        )
-        })}
+        {inputs}
         <h2>Your Choices</h2>
-        {/* <h4>[</h4> */}
-        {choosen.map((res) => {
+        {chosen.map((res) => {
             return(<p>{res}</p>) 
         })}
-        {/* <h4>]</h4> */}
-        <button className='listButton' disabled={choosen.length == 0} onClick={()=>reset()}>Reset</button>
-        <button className='listButton' disabled={choosen.length == userNumber ? false : true} onClick={() => handleSubmit(choosen)}>Confirm</button>
+        <button className='confirmButton' disabled={chosen.length == userNumber ? false : true} onClick={() => handleSubmit(chosen)}>Confirm</button>
         </div>
         </>
     )
