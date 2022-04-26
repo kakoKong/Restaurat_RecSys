@@ -1,18 +1,20 @@
 #import Flask
-from flask import Flask, render_template, request
+from audioop import cross
+from flask import Flask, render_template, request, send_from_directory
 from flask_restful import reqparse
-from flask_cors import CORS #comment this on deployment
+from flask_cors import CORS, cross_origin #comment this on deployment
 import pickle
 
 import pandas as pd
 
 #create an instance of Flask
-app = Flask(__name__, static_folder='front-end/build')
+app = Flask(__name__, static_folder='front-end/build', static_url_path='')
 app.config['JSON_SORT_KEYS'] = False
 # app = Flask(__name__, static_url_path='', static_folder='frontend/build')
 CORS(app)
 
 @app.route('/predict/', methods=['POST'])
+@cross_origin
 def predict():
     
     if request.method == "POST":
@@ -51,8 +53,17 @@ def restaurant_prediction(name):
     return result
 
 @app.route('/list/', methods=['GET'])
+@cross_origin
 def getList():
     csv_data = pd.read_csv('./data/simple_data.csv')
     csv_data = csv_data[['value', 'label']]
     json_data = csv_data.to_json(orient='index')
     return json_data
+
+@app.route('/')
+@cross_origin
+def serve():
+    return send_from_directory(app.static_folder, 'index.html')
+
+if __name__ == '__main__':
+    app.run()
