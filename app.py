@@ -60,7 +60,7 @@ def getList():
 @app.route('/')
 def serve():
     print(app.static_folder)
-    return send_from_directory(app.static_folder, 'index.html')
+    return send_from_directory(app.static_folder, './index.html')
 
 if __name__ == '__main__':
     app.run()
