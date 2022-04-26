@@ -5,8 +5,6 @@ from flask_cors import CORS #comment this on deployment
 import pickle
 
 import pandas as pd
-from pandas import array
-from model import run
 
 #create an instance of Flask
 app = Flask(__name__, static_folder='front-end/build')
