@@ -7,7 +7,7 @@ from flask_cors import CORS
 import pickle
 
 import pandas as pd
-# from model import run
+from model import run
 
 #create an instance of Flask
 app = Flask(__name__, static_folder='front-end/build', static_url_path='')
