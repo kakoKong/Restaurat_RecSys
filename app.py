@@ -11,13 +11,6 @@ app = Flask(__name__, static_folder='front-end/build')
 app.config['JSON_SORT_KEYS'] = False
 # app = Flask(__name__, static_url_path='', static_folder='frontend/build')
 CORS(app)
-#Route to home page
-@app.route('/')
-def home():
-    return render_template('home.html')
-if __name__ == '__main__':
-    app.run(host='localhost', debug=True)
-    
 
 @app.route('/predict/', methods=['POST'])
 def predict():
