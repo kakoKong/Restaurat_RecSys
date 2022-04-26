@@ -8,7 +8,7 @@ function App() {
   const [state, setState] = useState(0)
 
   useEffect(()=>{
-    axios.get('https://stark-brushlands-65521.herokuapp.com/').then(response => {
+    axios.get('https://kk-restaurant-recsys.herokuapp.com/').then(response => {
       setGetMessage(response)
     }).catch(error => {
       console.log(error)

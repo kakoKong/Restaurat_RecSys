@@ -11,7 +11,7 @@ const Predictor = (props) => {
     const submitName = async (resName) => {
     
         setLoad(true)
-        await axios.post('https://stark-brushlands-65521.herokuapp.com/predict/', resName).then(res =>{
+        await axios.post('https://kk-restaurant-recsys.herokuapp.com/predict/', resName).then(res =>{
             props.setResult(Object.values(res.data))
             setLoad(false)
             setPredict(true)

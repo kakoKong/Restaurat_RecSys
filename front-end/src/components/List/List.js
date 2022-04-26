@@ -9,7 +9,7 @@ const List = (props) => {
 
     const userNumber = props.userNumber;
     useEffect( () => {  
-        axios.get('https://stark-brushlands-65521.herokuapp.com/list/')
+        axios.get('https://kk-restaurant-recsys.herokuapp.com/list/')
         .then( (res) =>{
             setNames(Object.entries(res.data))
         })
