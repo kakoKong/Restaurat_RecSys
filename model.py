@@ -7,17 +7,18 @@ from sklearn.metrics.pairwise import cosine_similarity
 metaData = pd.read_csv('./data/main_data.csv', engine='python');
 metaData = metaData.drop(columns = 'Unnamed: 0')
 
-# Soup = Join of Strings of the features we wanted
-def create_soup(x):
-    soup =  (''.join(x['Cuisine Style']) + ' ' + 
-             ''.join(x['Cuisine Style']) + ' ' + 
-             ''.join(x['Cuisine Style']) + ' ' + 
-             ''.join(x['Reviews']) + ' ' +
-             ''.join(str(x['Rating'])) + ' ' +
-             ''.join(x['Price Range']) + ' ' +
-             ''.join(x['Price Range']) + ' '
+# StringSet = Join of Strings of the features we wanted
+def create_stringSet(x):
+    stringSet =  (
+            ''.join(x['Cuisine Style']) + ' ' + 
+            ''.join(x['Cuisine Style']) + ' ' + 
+            ''.join(x['Cuisine Style']) + ' ' + 
+            ''.join(x['Price Range']) + ' ' +
+            ''.join(x['Price Range']) + ' ' +
+            ''.join(x['Reviews']) + ' ' +
+            ''.join(str(x['Rating']))
             )
-    return soup;
+    return stringSet;
 
 metaData = metaData.reset_index()
 indices = pd.Series(metaData.index, index=metaData['Name'])
@@ -28,17 +29,19 @@ def run(inputs):
     global indices
     global count
     
-    metaData['soup'] = metaData.apply(create_soup, axis=1)
-    metaData['soup'].head()
+    metaData['stringSet'] = metaData.apply(create_stringSet, axis=1)
+    metaData['stringSet'].head()
     
     if (len(inputs) == 1):
         
+#         metaData = metaData.reset_index()
+        # Identify metaData Index
         indices= pd.Series(metaData.index, index=metaData['Name'])
 
         #Another Way: tfIdVectorizer => Weight instead of Count (Give weight to frequent word)
 
         # Return Matrix of count words
-        count_matrix = count.fit_transform(metaData['soup'])
+        count_matrix = count.fit_transform(metaData['stringSet'])
         cosine_sim2 = cosine_similarity(count_matrix, count_matrix)
         
         return give_rec(inputs[0], cosine_sim2)
@@ -63,7 +66,7 @@ def give_rec(title, sig):
     sig_scores = sig_scores[1:11]
     
     res_indices = [i[0] for i in sig_scores]
-    
+
     resList = (metaData[['Name', 'Cuisine Style', 'Rating', 'URL_TA']].iloc[res_indices])
 
     return resList
@@ -76,16 +79,16 @@ def giveMultiRec(userNum, Names, metaData):
         for name in Names:
             indexes.append(indices[name])
 
-        soup = ''
+        stringSet = ''
         for i in indexes:
-            soup += (metaData['soup'].iloc[i])
+            stringSet += (metaData['stringSet'].iloc[i])
         
-        metaData = metaData.append({'Name': 'Input','soup' : soup}, ignore_index=True)
+        metaData = metaData.append({'Name': 'Input','stringSet' : stringSet}, ignore_index=True)
         
         return metaData
 
-def getRealRec(metaData, count):     
-    count_matrix = count.fit_transform(metaData['soup'])
+def getRealRec(metaData, count):
+    count_matrix = count.fit_transform(metaData['stringSet'])
 
     cosine_sim3 = cosine_similarity(count_matrix, count_matrix)
     result = give_rec('Input', cosine_sim3)
