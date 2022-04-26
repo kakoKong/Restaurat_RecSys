@@ -50,13 +50,13 @@ CORS(app)
 #     result = model(name)
 #     return result
 
-@app.route('/list/', methods=['GET'])
-@cross_origin
-def getList():
-    csv_data = pd.read_csv('./data/simple_data.csv')
-    csv_data = csv_data[['value', 'label']]
-    json_data = csv_data.to_json(orient='index')
-    return json_data
+# @app.route('/list/', methods=['GET'])
+# @cross_origin
+# def getList():
+#     csv_data = pd.read_csv('./data/simple_data.csv')
+#     csv_data = csv_data[['value', 'label']]
+#     json_data = csv_data.to_json(orient='index')
+#     return json_data
 
 @app.route('/')
 @cross_origin
