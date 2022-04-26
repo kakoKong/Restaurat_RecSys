@@ -1,0 +1,56 @@
+.confirmButton{
+    /* margin-bottom: 20px; */
+    margin: 10px 5px;
+    padding: 10px;
+    font-size: 12px;
+    font-weight: bold;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+    transition: 200ms ease-in-out;
+}
+
+.confirmButton:hover{
+    background-color: rgb(185, 131, 64);
+    color: white;
+}
+
+.confirmButton:disabled{
+    background-color: rgb(161, 161, 161);
+    cursor:auto;
+}
+
+.drop-down {
+    color:black;
+    margin: 1em;
+    cursor: pointer;
+}
+
+.restaurant-card{
+    border: 3px solid rgb(216, 216, 216);
+    margin: 20px;
+    padding: 20px 15px;
+    padding-top: 0;
+    border-radius: 10px;
+    transition: 500ms ease-in-out;
+}
+
+.restaurant-card p{
+    font-size: 15px;
+}
+a .restaurant-card{
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+}
+
+a:link{
+    text-decoration: none;
+}
+
+.restaurant-card:hover{
+    background-color: white;
+    color: rgb(173, 132, 22);
+}

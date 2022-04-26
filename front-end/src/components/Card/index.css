@@ -1,0 +1,33 @@
+.card {
+    /* position: absolute; */
+    /* top: 50%; */
+   
+    width: 20em;
+    height: 100%;
+    background-color: rgb(160, 118, 67);
+    margin: auto auto;
+    margin-top: 20%;
+    margin-bottom: 10%;
+    padding: 1em 2em;
+    border-radius: 10px;
+  }
+   
+  .nextButton{
+    margin: 0.5em;
+    display: inline-block;
+    font-size: 15px;
+    border: white solid 1px;
+    padding: 3px 5px;
+    border-radius: 5px;
+    background-color: white;
+    color: rgb(143, 110, 71);
+    font-weight: bold;
+    box-shadow: none;
+    transition: 300ms ease-in-out;
+    cursor: pointer;
+  }
+
+  .nextButton:hover{
+    color:white;
+    background-color: rgb(66, 66, 66);
+  }
