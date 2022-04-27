@@ -3,7 +3,11 @@
 ## Backend Setup
 In the main ./app directory, run the command
 ```
+<<<<<<< HEAD
 pip3 install requirement.txt
+=======
+pip3 install -r requirements.txt
+>>>>>>> 1c59e15b5bae7b45556ab897951b1d72306b1d0a
 ```
 to install all the dependencies needed for back-end
 

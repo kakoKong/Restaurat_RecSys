@@ -1,5 +1,4 @@
 #import Flask
-from audioop import cross
 from flask import Flask, render_template, request
 from flask.helpers import send_from_directory
 from flask_restful import reqparse
