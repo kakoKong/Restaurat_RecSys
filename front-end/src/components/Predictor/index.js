@@ -8,10 +8,12 @@ const Predictor = (props) => {
     const [ predict, setPredict] = useState(false);
     const [post, setPost] = useState({type: 'str',  message: props.chosenRes})
 
+    const baseURI = 'http://127.0.0.1:5000/'
+
     const submitName = async (resName) => {
     
         setLoad(true)
-        await axios.post('https://kk-restaurant-recsys.herokuapp.com/predict/', resName).then(res =>{
+        await axios.post(`${baseURI}/predict/`, resName).then(res =>{
             props.setResult(Object.values(res.data))
             setLoad(false)
             setPredict(true)
