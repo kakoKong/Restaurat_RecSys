@@ -8,7 +8,7 @@ pip3 install -r requirements.txt
 to install all the dependencies needed for back-end
 
 ## Front-end Setup
-In the ./app/front-end directory, ru the command
+In the ./app/front-end directory, run the command
 ```
 npm install
 ```
