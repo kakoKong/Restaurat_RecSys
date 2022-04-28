@@ -7,8 +7,10 @@ function App() {
   const [getMessage, setGetMessage] = useState({})
   const [state, setState] = useState(0)
 
+  const baseURI = 'http://127.0.0.1:5000/'
+
   useEffect(()=>{
-    axios.get('http://127.0.0.1:5000/').then(response => {
+    axios.get(baseURI).then(response => {
       setGetMessage(response)
     }).catch(error => {
       console.log(error)
